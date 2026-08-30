@@ -1,16 +1,16 @@
 contact_links:
   - name: "💬 Questions"
-    url: https://github.com/qumo-dev/qumo-lb/discussions
+    url: https://github.com/qumo-dev/quic-lb/discussions
     about: "Use Discussions for implementation and usage questions"
 
   - name: "📚 Documentation"
-    url: https://qumo-dev.github.io/qumo-lb/
+    url: https://qumo-dev.github.io/quic-lb/
     about: "Project documentation"
 
   - name: "🔐 Security Report"
-    url: https://github.com/qumo-dev/qumo-lb/security/advisories
+    url: https://github.com/qumo-dev/quic-lb/security/advisories
     about: "Report security vulnerabilities directly"
 
   - name: "🤝 Contributing"
-    url: https://github.com/qumo-dev/qumo-lb/blob/main/CONTRIBUTING.md
+    url: https://github.com/qumo-dev/quic-lb/blob/main/CONTRIBUTING.md
     about: "Please read our contributing guidelines"

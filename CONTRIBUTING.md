@@ -1,6 +1,6 @@
-# Contributing to qumo-lb
+# Contributing to quic-lb
 
-Thank you for your interest in contributing to qumo-lb! We welcome contributions from the community.
+Thank you for your interest in contributing to quic-lb! We welcome contributions from the community.
 
 ## Code of Conduct
 
@@ -19,8 +19,8 @@ Before you begin, ensure you have the following installed:
 
 1. Fork and clone the repository:
    ```bash
-   git clone https://github.com/your-username/qumo-lb.git
-   cd qumo-lb
+   git clone https://github.com/your-username/quic-lb.git
+   cd quic-lb
    ```
 
 2. Install dependencies:
@@ -42,7 +42,7 @@ Before you begin, ensure you have the following installed:
 
 ### 1. Choose an Issue
 
-- Check existing [issues](https://github.com/qumo-dev/qumo-lb/issues) for good first issues
+- Check existing [issues](https://github.com/qumo-dev/quic-lb/issues) for good first issues
 - Look for issues labeled `good first issue` or `help wanted`
 - Comment on the issue to indicate you're working on it
 
@@ -175,4 +175,4 @@ When submitting a pull request:
 
 By contributing to this project, you agree that your contributions will be licensed under the same license as the project (see LICENSE file).
 
-Thank you for contributing to qumo-lb! 🚀
+Thank you for contributing to quic-lb! 🚀

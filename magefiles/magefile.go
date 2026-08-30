@@ -1,4 +1,4 @@
-// Package main is the mage build script for qumo-lb.
+// Package main is the mage build script for quic-lb.
 package main
 
 import (

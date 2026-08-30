@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Renamed module from `qumo-lb` to `quic-lb` to match repo name.
+- Root package uses re-export pattern; implementation lives in `internal/`.
+
 ### Fixed
 - CI: `go test ./...` no longer fails on repos with no Go packages (added root `doc.go`).
 - CI: combined redundant double test run into single `-v -coverprofile` pass in `go.yml`.
