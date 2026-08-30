@@ -1,7 +1,7 @@
 # Creates a GitHub Release when a version tag is pushed.
 #
-# qumo-lb is a Go library: the tag itself is the release artifact (consumed via
-# `go get github.com/qumo-dev/qumo-lb@vX.Y.Z`), so there is nothing to compile.
+# quic-lb is a Go library: the tag itself is the release artifact (consumed via
+# `go get github.com/qumo-dev/quic-lb@vX.Y.Z`), so there is nothing to compile.
 # Release notes come from GitHub's auto-generator (`--generate-notes`), grouped
 # into sections by the label configuration in .github/release.yml.
 #

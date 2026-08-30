@@ -1,4 +1,4 @@
-module github.com/qumo-dev/qumo-lb/magefiles
+module github.com/qumo-dev/quic-lb/magefiles
 
 go 1.27.0
 

@@ -1,3 +1,3 @@
-module github.com/qumo-dev/qumo-lb
+module github.com/qumo-dev/quic-lb
 
 go 1.27.0
