@@ -1,0 +1,89 @@
+# This workflow will build a golang project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-go
+
+name: Go
+
+on:
+  push:
+    branches: ["main"]
+    tags: ["v*"]
+  pull_request:
+    paths:
+      - "**.go"
+      - "go.mod"
+      - "go.sum"
+      - "magefiles/**"
+      - ".github/workflows/go.yml"
+  workflow_dispatch: {}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version-file: go.mod
+
+      - name: Test with coverage
+        run: go test -v -coverprofile=coverage.out -covermode=atomic -coverpkg=./... ./...
+
+      - name: Upload coverage report
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./coverage.out
+          flags: go
+          name: go-coverage
+          fail_ci_if_error: false
+          verbose: true
+
+  # Race detection requires CGO + a C compiler (gcc). The ubuntu runner has
+  # gcc; local dev machines without gcc cannot run -race. We isolate it in
+  # its own job so the rest of CI is unaffected by CGO_ENABLED.
+  race:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version-file: go.mod
+
+      - name: Test with -race
+        env:
+          # -race needs CGO and a C compiler; ubuntu-latest ships gcc.
+          CGO_ENABLED: "1"
+        run: |
+          go test -race -short -count=1 -timeout=10m ./...
+
+  # Slow real-QUIC integration benchmarks. Runs the FULL benchmark suite WITHOUT
+  # -short, so the benchmarks that self-skip under testing.Short() actually run
+  # here. Each op is a multi-second aggregate (frames/sec, MB/s) stable across
+  # samples, so -benchtime=1x is appropriate (unlike the microbenchmarks above).
+  # Runs only on push (main/tags) and manual dispatch — NOT on PRs — because it
+  # costs ~10-19 runner-minutes. Uploaded for trend archival only; no benchstat gate.
+  benchmark-integration:
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version-file: go.mod
+
+      - name: Run integration benchmarks
+        run: |
+          go test -run='^$' -bench=. -benchmem -benchtime=1x -count=5 -timeout=25m ./... | tee bench-integration.txt
+
+      - name: Upload integration bench output
+        uses: actions/upload-artifact@v4
+        with:
+          name: bench-integration
+          path: bench-integration.txt
+          retention-days: 90
