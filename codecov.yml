@@ -1,0 +1,27 @@
+ignore:
+  # Build tooling is not library code.
+  - "magefiles/"
+
+flag_management:
+  individual_flags: true
+
+flags:
+  go:
+    paths:
+      - .
+    carryforward: false
+
+coverage:
+  status:
+    project:
+      go:
+        target: 75%
+        threshold: 2%
+        flags:
+          - go
+    patch:
+      go:
+        target: 70%
+        threshold: 5%
+        flags:
+          - go

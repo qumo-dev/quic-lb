@@ -1,0 +1,7 @@
+.git
+bin
+coverage
+cov
+**/node_modules
+**/*.log
+**/testdata
