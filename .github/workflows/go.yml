@@ -27,11 +27,8 @@ jobs:
         with:
           go-version-file: go.mod
 
-      - name: Test
-        run: go test -v ./...
-
       - name: Test with coverage
-        run: go test -coverprofile=coverage.out -covermode=atomic -coverpkg=./... ./...
+        run: go test -v -coverprofile=coverage.out -covermode=atomic -coverpkg=./... ./...
 
       - name: Upload coverage report
         uses: codecov/codecov-action@v5
@@ -61,7 +58,7 @@ jobs:
           # -race needs CGO and a C compiler; ubuntu-latest ships gcc.
           CGO_ENABLED: "1"
         run: |
-          go test -race -count=1 -timeout=10m ./...
+          go test -race -short -count=1 -timeout=10m ./...
 
   # Slow real-QUIC integration benchmarks. Runs the FULL benchmark suite WITHOUT
   # -short, so the benchmarks that self-skip under testing.Short() actually run

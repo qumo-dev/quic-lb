@@ -60,9 +60,6 @@ jobs:
           go-version-file: go.mod
           cache: true
 
-      - name: Install benchstat
-        run: go install golang.org/x/perf/cmd/benchstat@latest
-
       - name: Detect changed Go packages
         id: changed
         run: |
@@ -79,6 +76,10 @@ jobs:
             echo "any=false" >> "$GITHUB_OUTPUT"
             echo "No changed Go packages -- nothing to benchmark."
           fi
+
+      - name: Install benchstat
+        if: steps.changed.outputs.any == 'true'
+        run: go install golang.org/x/perf/cmd/benchstat@latest
 
       - name: Checkout base into a worktree
         if: steps.changed.outputs.any == 'true'
