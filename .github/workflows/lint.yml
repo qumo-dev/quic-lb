@@ -31,4 +31,5 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           level: warning
           reporter: github-pr-review
-          go_version: ^1.27
+          go_version_file: go.mod
+          golangci_lint_version: v2

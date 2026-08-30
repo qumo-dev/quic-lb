@@ -125,7 +125,7 @@ jobs:
           echo '::endgroup::'
 
       - name: Post or update comment
-        if: steps.changed.outputs.any == 'true' && github.event_name == 'pull_request'
+        if: steps.changed.outputs.any == 'true' && github.event_name == 'pull_request' && hashFiles('benchstat-comment.md') != ''
         env:
           GH_TOKEN: ${{ github.token }}
           PR: ${{ github.event.pull_request.number }}
